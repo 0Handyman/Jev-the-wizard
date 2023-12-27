@@ -1,0 +1,120 @@
+
+import javax.swing.JOptionPane;
+
+public class MathOperationsCalculator {
+
+    public static void main(String[] args) {
+        while (true) {
+            showMenu();
+            int choice = getChoice();
+
+            switch (choice) {
+                case 1 -> performAddition();
+                case 2 -> performSubtraction();
+                case 3 -> performMultiplication();
+                case 4 -> performDivision();
+                case 5 -> performSquareRoot();
+                case 6 -> performSine();
+                case 7 -> performCosine();
+                case 8 -> performTangent();
+                case 9 -> {
+                    JOptionPane.showMessageDialog(null, "Exiting the program. Thank you!");
+                    System.exit(0);
+                }
+                default -> JOptionPane.showMessageDialog(null, "Invalid choice. Please choose a valid option.");
+            }
+        }
+    }
+
+    private static void showMenu() {
+        String menu = """
+                      Math Operations Calculator
+                      
+                      1. Addition
+                      2. Subtraction
+                      3. Multiplication
+                      4. Division
+                      5. Square Root
+                      6. Sine
+                      7. Cosine
+                      8. Tangent
+                      9. Exit
+                      
+                      Enter your choice:""";
+        JOptionPane.showMessageDialog(null, menu);
+    }
+
+    private static int getChoice() {
+        String input = JOptionPane.showInputDialog("Enter your choice:");
+        return Integer.parseInt(input);
+    }
+
+    private static void performAddition() {
+        double num1 = getOperand("Enter the first number:");
+        double num2 = getOperand("Enter the second number:");
+        double result = num1 + num2;
+        displayResult("Addition", result);
+    }
+
+    private static void performSubtraction() {
+        double num1 = getOperand("Enter the first number:");
+        double num2 = getOperand("Enter the second number:");
+        double result = num1 - num2;
+        displayResult("Subtraction", result);
+    }
+
+    private static void performMultiplication() {
+        double num1 = getOperand("Enter the first number:");
+        double num2 = getOperand("Enter the second number:");
+        double result = num1 * num2;
+        displayResult("Multiplication", result);
+    }
+
+    private static void performDivision() {
+        double num1 = getOperand("Enter the numerator:");
+        double num2 = getOperand("Enter the denominator:");
+        if (num2 != 0) {
+            double result = num1 / num2;
+            displayResult("Division", result);
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Division by zero is not allowed.");
+        }
+    }
+
+    private static void performSquareRoot() {
+        double num = getOperand("Enter the number:");
+        if (num >= 0) {
+            double result = Math.sqrt(num);
+            displayResult("Square Root", result);
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Square root of a negative number is not defined.");
+        }
+    }
+
+    private static void performSine() {
+        double angle = getOperand("Enter the angle in degrees:");
+        double result = Math.sin(Math.toRadians(angle));
+        displayResult("Sine", result);
+    }
+
+    private static void performCosine() {
+        double angle = getOperand("Enter the angle in degrees:");
+        double result = Math.cos(Math.toRadians(angle));
+        displayResult("Cosine", result);
+    }
+
+    private static void performTangent() {
+        double angle = getOperand("Enter the angle in degrees:");
+        double result = Math.tan(Math.toRadians(angle));
+        displayResult("Tangent", result);
+    }
+
+    private static double getOperand(String message) {
+        String input = JOptionPane.showInputDialog(message);
+        return Double.parseDouble(input);
+    }
+
+    private static void displayResult(String operation, double result) {
+        JOptionPane.showMessageDialog(null, operation + " Result: " + result);
+    }
+}
